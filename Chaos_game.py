@@ -49,7 +49,16 @@ def init_polygon(width, height, n, mode):
             p.append(((width/2 + r*math.sin(angle),
                     height/2 + r*math.cos(angle)),
                     (int(color[0]*255), int(color[1]*255), int(color[2]*255))))
-        
+        # manual points
+        elif mode==1:
+            p.append(((points[i][0],
+                    points[i][1]),
+                    (int(color[0]*255), int(color[1]*255), int(color[2]*255))))
+        else:
+            print("modo no valido, por favor ingrese 0 para automatico y 1 para manual")
+            exit()
+
+    print(p)
     return p
 
 def main(width, height, n, r,mode):
