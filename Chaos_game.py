@@ -6,6 +6,7 @@ from pygame.locals import *
 from enum import Enum
 index = [0, 0, 0]
 points=[]
+background_color=(0,0,0)
 
 class Mode(Enum):
     AUTOMATIC = 0
@@ -62,8 +63,6 @@ def init_polygon(width, height, n=3, mode=Mode.AUTOMATIC):
             p.append(((points[i][0],
                     points[i][1]),
                     (int(color[0]*255), int(color[1]*255), int(color[2]*255))))
-
-    print(p)
     return p
 
 def main(width, height, n, r,mode):
@@ -71,6 +70,7 @@ def main(width, height, n, r,mode):
         Mode(mode)
         pygame.init()
         surface = pygame.display.set_mode((width, height))
+        surface.fill(background_color)
         pygame.display.set_caption('Chaos Game')
         x, y = (400, 300)
         step = 0
@@ -89,7 +89,6 @@ def main(width, height, n, r,mode):
                         points.append((event.pos[0],event.pos[1]))
                         pygame.display.update()
             if points_clicked == n or mode==Mode.AUTOMATIC:
-                
                 step = step + 1
                 p = init_polygon(width, height, n,mode)
                 point_idx = random_point_index(p)
@@ -97,15 +96,19 @@ def main(width, height, n, r,mode):
                 color = p[point_idx][1]
                 x += (pos[0] - x) * r
                 y += (pos[1] - y) * r
-
                 mark_pixel(surface, (int(x), int(y)), color)
-
+                print(step)
                 if step % 1000 == 0:
+                    font = pygame.font.Font(None, 24)
+                    text = font.render(f"Iteration: {step}", True, (255,255,255), background_color)
+                    surface.blit(text, (10, 10))
                     pygame.display.update()
+                    pygame.display.update()
+
     except ValueError:
-        print("Valor de modo invalido. Por favor ingresar 0 por modo automatico y 1 para manual")
+        print("Valor de modo invalido. Por favor ingresar 0 por modo automático y 1 para manual")
 
 
 if __name__ == "__main__":
-    n=3;mode=5; main(800, 800, n, 0.45, mode)
+    n=6;mode=Mode.AUTOMATIC; main(800, 800, n, 0.45, mode)
     
