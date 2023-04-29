@@ -57,8 +57,8 @@ class TestRandomPointIndex:
 
     # Tests that the function returns a random index within the range of p when index[1] and index[2] are uninitialized. 
     def test_random_point_index_uninitialized_index(self):
-        global index
-        index = [0, 0, 0]
+        global vertex
+        vertex = [0, 0, 0]
         p = [1, 2, 3, 4]
         assert random_point_index(p) in [0, 1, 2, 3]
 
