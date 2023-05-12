@@ -93,7 +93,7 @@ def random_point_vertex(p):
     global vertex
     vertex[2] = vertex[1]
     vertex[1] = vertex[0]
-    # checks if the two prevously vertices are the same
+    # checks if the two prevously vertices are the same vertex=[0,0,0]
     distance1 = abs(vertex[1] - vertex[2])
     used_indices = set(vertex)
     while True:
@@ -249,7 +249,7 @@ def main(width, height, n, r,mode):
                 surface.blit(text, (10, 10))
                 pygame.display.update()       
     except ValueError:
-        print("Valor de modo invalido. Por favor ingresar 0 por modo automático y 1 para manual")
+        print("Ivalid Mode Value. Please enter 0 for automatic mode and 1 for manual mode")
     
 if __name__ == "__main__":
     main(800, 800, args.nodes, args.ratio, Mode(args.mode))
